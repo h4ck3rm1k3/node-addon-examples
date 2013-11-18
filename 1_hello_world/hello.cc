@@ -3,9 +3,12 @@
 
 using namespace v8;
 
-Handle<Value> Method(const Arguments& args) {
-  HandleScope scope;
-  return scope.Close(String::New("world"));
+//const Arguments& args
+void Method(const v8::FunctionCallbackInfo<Value>& info) {
+  HandleScope scope(Isolate::GetCurrent()); 
+  v8::Local<v8::String> world = scope.Close(String::New("world"));
+  info.GetReturnValue().Set(world);
+
 }
 
 void init(Handle<Object> exports) {
